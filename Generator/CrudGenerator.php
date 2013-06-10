@@ -6,12 +6,8 @@ use Sensio\Bundle\GeneratorBundle\Generator\Generator;
 
 class CrudGenerator extends Generator
 {
-    public function generate()
+    public function generate($namespace, $module, $entity)
     {
-        $namespace = 'Msi';
-        $module = 'Nivo';
-        $entity = 'Slider';
-
         $parameters = [
             'namespace' => $namespace,
             'module'    => $module,
