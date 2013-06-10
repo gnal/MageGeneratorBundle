@@ -84,7 +84,7 @@ class CrudGenerator extends Generator
         ];
 
         foreach ($files as $value) {
-            $this->renderFile($value['template'], 'Magento/'.$value['target'], $parameters);
+            $this->renderFile($value['template'], 'magento/'.$value['target'], $parameters);
         }
     }
 }
