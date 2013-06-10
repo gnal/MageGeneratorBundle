@@ -1,0 +1,32 @@
+<?php
+class {{ namespace }}_{{ module }}_Block_Adminhtml_{{ entity }}_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+{
+    /**
+     * Init class
+     */
+    public function __construct()
+    {
+        $this->_blockGroup = '{{ namespace|lower }}_{{ module|lower }}';
+        $this->_controller = 'adminhtml_{{ entity|lower }}';
+
+        parent::__construct();
+
+        $this->_updateButton('save', 'label', $this->__('Save {{ entity }}'));
+        $this->_updateButton('delete', 'label', $this->__('Delete {{ entity }}'));
+    }
+
+    /**
+     * Get Header text
+     *
+     * @return string
+     */
+    public function getHeaderText()
+    {
+        if (Mage::registry('{{ namespace|lower }}_{{ module|lower }}')->getId()) {
+            return $this->__('Edit {{ entity }}');
+        }
+        else {
+            return $this->__('New {{ entity }}');
+        }
+    }
+}

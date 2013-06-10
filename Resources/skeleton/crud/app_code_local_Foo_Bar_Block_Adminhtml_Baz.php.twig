@@ -1,0 +1,14 @@
+<?php
+class {{ namespace }}_{{ module }}_Block_Adminhtml_{{ entity }} extends Mage_Adminhtml_Block_Widget_Grid_Container
+{
+    public function __construct()
+    {
+        // The blockGroup must match the first half of how we call the block, and controller matches the second half
+        // ie. {{ namespace|lower }}_{{ module|lower }}/adminhtml_{{ entity|lower }}
+        $this->_blockGroup = '{{ namespace|lower }}_{{ module|lower }}';
+        $this->_controller = 'adminhtml_{{ entity|lower }}';
+        $this->_headerText = $this->__('{{ entity }}');
+
+        parent::__construct();
+    }
+}

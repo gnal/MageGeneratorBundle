@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <{{ namespace }}_{{ module }}>
+            <version>1.0.0</version>
+        </{{ namespace }}_{{ module }}>
+    </modules>
+
+    <global>
+        <helpers>
+            <{{ namespace|lower }}_{{ module|lower }}>
+                <!-- This is where we define our helper directory -->
+                <class>{{ namespace }}_{{ module }}_Helper</class>
+            </{{ namespace|lower }}_{{ module|lower }}>
+        </helpers>
+
+        <blocks>
+            <{{ namespace|lower }}_{{ module|lower }}>
+                <!-- Set a block definition and lookup directory -->
+                <class>{{ namespace }}_{{ module }}_Block</class>
+            </{{ namespace|lower }}_{{ module|lower }}>
+        </blocks>
+
+        <models>
+            <{{ namespace|lower }}_{{ module|lower }}>
+                <!-- This is where we define our model directory -->
+                <class>{{ namespace }}_{{ module }}_Model</class>
+                <!-- Define a resource to create a custom table -->
+                <resourceModel>{{ namespace|lower }}_{{ module|lower }}_mysql4</resourceModel>
+            </{{ namespace|lower }}_{{ module|lower }}>
+
+            <!-- Here's our resource model we'll use to create a database table -->
+            <{{ namespace|lower }}_{{ module|lower }}_mysql4>
+                <class>{{ namespace }}_{{ module }}_Model_Mysql4</class>
+                <entities>
+                    <!-- Let's define our table, we'll call it with the {{ entity|lower }} name, but the real table is {{ namespace|lower }}_{{ module|lower }}_{{ entity|lower }} -->
+                    <!-- After we define our entity, we can call it with our model by calling {{ namespace|lower }}_{{ module|lower }}/{{ entity|lower }} -->
+                    <{{ entity|lower }}>
+                        <table>{{ namespace|lower }}_{{ module|lower }}_{{ entity|lower }}</table>
+                    </{{ entity|lower }}>
+                </entities>
+            </{{ namespace|lower }}_{{ module|lower }}_mysql4>
+        </models>
+
+        <!-- And finally we define our resource setup script -->
+        <resources>
+            <{{ namespace|lower }}_{{ module|lower }}_setup>
+                <setup>
+                    <module>{{ namespace }}_{{ module }}</module>
+                </setup>
+            </{{ namespace|lower }}_{{ module|lower }}_setup>
+        </resources>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <!-- This is how we load our Adminhtml controllers -->
+                    <modules>
+                        <{{ namespace }}_{{ module }} before="Mage_Adminhtml">{{ namespace }}_{{ module }}_Adminhtml</{{ namespace }}_{{ module }}>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <{{ namespace|lower }}_{{ module|lower }}>
+                    <!--
+                    We again keep a nice naming convention and make our module upgrade proof by placing it in a separate folder
+                    - Since we are in the adminhtml node, this will look for the XML file in the app/design/adminhtml/default/default root folder
+                    -->
+                    <file>{{ namespace|lower }}/{{ module|lower }}.xml</file>
+                </{{ namespace|lower }}_{{ module|lower }}>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

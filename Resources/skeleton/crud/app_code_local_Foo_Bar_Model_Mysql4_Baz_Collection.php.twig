@@ -1,0 +1,8 @@
+<?php
+class {{ namespace }}_{{ module }}_Model_Mysql4_{{ entity }}_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
+{
+    protected function _construct()
+    {
+        $this->_init('{{ namespace|lower }}_{{ module|lower }}/{{ entity|lower }}');
+    }
+}
