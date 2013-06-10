@@ -76,6 +76,28 @@ class {{ namespace }}_{{ module }}_Adminhtml_{{ entity }}Controller extends Mage
         }
     }
 
+    public function deleteAction()
+    {
+        $id  = $this->getRequest()->getParam('id');
+        $model = Mage::getModel('{{ namespace|lower }}_{{ module|lower }}/{{ entity|lower }}');
+
+        if ($id) {
+            // Load record
+            $model->load($id);
+
+            // Check if record is loaded
+            if (!$model->getId()) {
+                Mage::getSingleton('adminhtml/session')->addError($this->__('This {{ entity|lower }} no longer exists.'));
+                $this->_redirect('*/*/');
+
+                return;
+            }
+
+            $model->delete();
+            $this->_redirect('*/*/');
+        }
+    }
+
     public function messageAction()
     {
         $data = Mage::getModel('{{ namespace|lower }}_{{ module|lower }}/{{ entity|lower }}')->load($this->getRequest()->getParam('id'));
